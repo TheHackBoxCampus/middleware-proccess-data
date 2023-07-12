@@ -1,3 +1,4 @@
 node_modules/
 controller/
 package-lock.json
+.env

@@ -1,12 +1,17 @@
-import 'reflect-metadata';
-import { plainToClass } from "class-transformer"
-import { example } from './controller/example.js';
+import express from "express";
+import dotenv from "dotenv"; 
+import router from "./router/routes.js"; 
 
-let json = {
-    id: "",
-    name: "eduard",
-    age: 33
-};
+// env
+dotenv.config(); 
+let $server = JSON.parse(process.env.server); 
+let app = express(); 
 
-let data = plainToClass(example, json, {excludeExtraneousValues: true});
-console.log(data)
+// middleware
+app.use(express.json()); 
+
+app.use("/prueba", router);
+
+app.listen($server, () => {
+    console.log(`listening http://${$server.hostname}:${$server.port}`); 
+})
